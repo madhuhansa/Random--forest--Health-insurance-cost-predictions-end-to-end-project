@@ -3,6 +3,7 @@ from tkinter import ttk
 import joblib
 import numpy as np
 import pandas as pd
+import os
 
 # Color scheme
 DARK_BG = "#1F2937"       # Dark background
@@ -17,7 +18,9 @@ HIGHLIGHT_COLOR = "#3B82F6"  # Button active color
 COMBO_BG = "#4B5563"      # Combobox background
 
 def load_model():
-    return joblib.load("model.pkl")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(script_dir, "model.pkl")
+    return joblib.load(model_path)
 
 def calculate_bmi(weight, feet, inches):
     height_m = ((feet * 12) + inches) * 0.0254
@@ -68,7 +71,7 @@ def predict():
 
 # UI Setup
 root = tk.Tk()
-root.title("Insurance Cost Predictor")
+root.title("Health Insurance Cost Predictor")
 root.geometry("650x540")  
 root.resizable(False, False)
 root.configure(bg=DARK_BG)
